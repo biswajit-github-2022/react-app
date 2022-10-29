@@ -51,7 +51,7 @@ function App() {
       <Navbar title="TextUtils" aboutText="About us" mode={mode} toggleMode={toggleMode} showAlert={showAlert} changeCol={changeCol}/>
       <Alert alert={alert} />
       <div className="container">
-        <TextForm heading="Enter the text to analyze" mode={mode} showAlert={showAlert}/>
+        <TextForm heading="Enter the text to Your Website" mode={mode} showAlert={showAlert}/>
         <About />
       </div>
 
