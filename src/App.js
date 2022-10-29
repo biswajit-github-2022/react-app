@@ -1,24 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+//import './App.css';
+import React, { useState } from "react";
+import Alert from "./Components/Alert";
+import About from "./Components/About";
+import Navbar from "./Components/Navbar";
+import TextForm from "./Components/TetxForm";
+
 
 function App() {
+
+  const changeCol=(col)=>{
+    if (col==="danger"){
+      document.body.style.backgroundColor = "red"
+    }
+    if(col==="warning"){
+      document.body.style.backgroundColor = "yellow"
+    }
+    if(col==="primary"){
+      document.body.style.backgroundColor = "blue"
+    }
+  }
+
+  const [alert, setAlert] = useState(null)
+  const showAlert = (message,type) => {
+    setAlert({
+      msg:message,
+      type:type
+    })
+    setTimeout(()=>{
+      setAlert(null)
+    },2000)
+  }
+
+  const [mode, setMode] = useState("light")
+  const toggleMode = () => {
+    if (mode === "dark") {
+      setMode("light");
+      document.body.style.backgroundColor = "white"
+      showAlert("LightMode Enabled","success")
+      document.title="TextUtils-Home"
+    }
+    else {
+      setMode("dark");
+      document.body.style.backgroundColor = "#343a40"
+      showAlert("DarkMode Enabled","success")
+      document.title="TextUtils Dark mode"
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar title="TextUtils" aboutText="About us" mode={mode} toggleMode={toggleMode} showAlert={showAlert} changeCol={changeCol}/>
+      <Alert alert={alert} />
+      <div className="container">
+        <TextForm heading="Enter the text to analyze" mode={mode} showAlert={showAlert}/>
+        <About />
+      </div>
+
+    </>
   );
 }
 
